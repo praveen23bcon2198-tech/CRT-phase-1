@@ -1,0 +1,129 @@
+//constructor
+//types - default 
+// parameterized
+// copy
+
+#include<iostream>
+using namespace std;
+
+//1 default constructor
+// class wifiConnection{
+//     public:
+//     string networkName;
+//     int password;   
+
+//     // default constructor
+//     wifiConnection(){
+//         networkName = "praveen";
+//         password = 123456789;
+//     }
+
+//     public:
+//     void showDetails(){
+//         cout<<"Network Name is :"<<networkName<<endl<<"And its password is:"<<password;
+//     }
+// };
+
+// int main(){
+//     wifiConnection w1;
+//     w1.showDetails();
+// }
+
+//2 parameterized constructor
+// class student{
+
+//     public:
+//     string name;
+//     int id;
+
+//     //constructor
+//     student(string studentName, int studentID){
+//         name = studentName;
+//         id = studentID;
+//     }
+
+//     public:
+//     void displayDetails(){
+//         cout<<name<<endl<<id;
+//     }
+// };
+
+// int main(){
+//     student std1("praveen", 123);
+//     std1.displayDetails();
+// }
+
+//3 copy constructor
+class student{
+
+    public:
+    string name;
+    int id;
+
+    //constructor
+    student(string studentName, int studentID){
+        name = studentName;
+        id = studentID;
+    }
+
+    //copy constructor
+    student(student &s){
+        name = s.name;
+        id = s.id;
+    }
+
+    public:
+    void displayDetails(){
+        cout<<name<<endl<<id;
+    }
+};
+int main(){
+    student std1("praveen", 123);
+    student std2(std1); // copy constructor is called here
+    std2.displayDetails();
+}
+
+/*problem --3
+pillar of OPPS
+Encapsulation
+ Encapsulation means we are binding the data into a single unit (functions, data, variables, methods)
+into a singl unit called class and making some restriction on this class members.
+data security
+controlled accesss over my data(main point)
+validation before accessing the data
+code maintainability
+*/
+
+#include<iostream>
+using namespace std;
+
+class bankAccount{
+    private:
+    int balance;
+
+    public:
+    void setbalance(int amount){
+        if(amount >= 0) balance = amount;
+        else cout<<"enter a valid number...";
+    }
+    public:
+    int getbalance(){  //ye hmesha koi n koi value return krke dega hi dega
+        return balance;
+    }
+
+};
+
+int main(){
+    bankAccount obj1;
+    obj1.setbalance(5000);
+    obj1.getbalance();
+    cout<<obj1.getbalance();
+}
+
+/*problem--4
+Abtraction
+Abstracton means hiding the implementation and showing only the neccessary, essential
+feature to the user
+abstract class -- class cannot be initialized and it is formed using the abstract keyword
+abstract method -- there is no initialization of the abstract method
+*/
