@@ -1,0 +1,270 @@
+/*when a child class poosessing a
+complete property if its 
+parent classs, then we can say it as inheritance
+types--
+1. single inheritance
+    parent-->child
+2. multilevel inheritance
+    grandparent-->parent-->child
+3. multiple inheritance
+    parent1, parent2 --> child
+4. hierarchical inheritance
+    parent --> child1, child2, child3
+5. hybrid inheritance
+    combination of above types
+    grandparent-->parent1, parent2 --> child
+*/
+
+#include<iostream>
+using namespace std;
+
+/*problen -- 1
+Inheritance
+types -- 1.1 single inheritance*/
+
+class vehile{
+    public:
+    void start(){
+        cout<<"vehicle starts"<<"\n";
+    }
+};
+
+class car : public vehile{
+    public:
+    void drive(){
+        cout<<"car is running"<<"\n";
+    }
+};
+
+int main(){
+    car obj1;
+    obj1.drive();
+    obj1.start();
+    return 0;
+}
+
+// type -- 1.2 multilevel inheritance
+class vehile{
+    public:
+    void start(){
+        cout<<"vehicle starts"<<"\n";
+    }
+};
+
+class car : public vehile{
+    public:
+    void drive(){
+        cout<<"car is running"<<"\n";
+    }
+};
+
+class speedometer : public car{
+    public:
+    void speed(){
+        cout<<"car is running at 60km/h"<<"\n";
+    }
+};
+
+int main(){
+    speedometer obj1;
+    obj1.speed();
+    obj1.drive();
+    obj1.start();
+    return 0;
+}
+
+// type -- 1.4 hierarchical inheritance
+
+class vehicle{
+    public:
+    void start(){
+        cout<<"vehicle starts"<<"\n";
+    }
+};
+
+class car : public vehicle{
+    public:
+    void drive(){
+        cout<<"car is running"<<"\n";
+    }
+};
+
+class bike : public vehicle{
+    public:
+    void ride(){
+        cout<<"bike is running"<<"\n";
+    }
+};
+
+int main(){
+    car obj1;
+    obj1.start();
+    obj1.drive();
+    bike obj2;
+    obj2.start();
+    obj2.ride();
+    return 0;
+}
+
+// type -- 1.3 multiple inheritance
+
+class parent1{
+    public:
+    void giveMeMoney(){
+        cout<<"mummy paisa do mujhe"<<"\n";
+    }
+};
+
+class parent2{
+    public:
+    void giveMeMoney(){
+        cout<<"papa paisa do mujhe"<<"\n";
+    }
+};
+
+class child : public parent1, public parent2{
+
+};
+
+int main(){
+    child obj1;
+    // obj1.giveMeMoney(); // This will cause ambiguity error
+    obj1.parent1::giveMeMoney(); // Resolving ambiguity by specifying the parent class
+    obj1.parent2::giveMeMoney(); // Resolving ambiguity by specifying the parent class
+    return 0;
+}
+
+#include<iostream>
+using namespace std;
+/*
+diamond problem - hybrid inheritance
+grandparent-->parent1, parent2 --> child
+esme dono parent class ko virtual class bnana pdega 
+kyuki child ko direct grandparent access krna hai
+agr virtual nhi bnayenge to child ke pass do raste honge to kisi 
+ek raste se jane pr koi ek parent naraz ho jayega, esiliye
+dono parent ko virtual bnana pdega*/
+
+// type -- 1.5 hybrid inheritance
+
+
+class A{
+    public:
+    void print(){
+        cout<<"BJP Wons"<<"\n";
+    }
+};
+
+class B : virtual public A{
+
+};
+
+class C : virtual public A{
+
+};
+
+class D : public B, public C{
+
+};
+
+int main(){
+    D obj1;
+    obj1.print();// Resolving ambiguity by specifying the parent class
+}
+
+/*
+problem --2
+polymorphism
+it means one name but many forms
+same function nehave differently depending od the typr pf the object it called
+tow types--
+1. Compile-time polymorphism (Function Overloading, Operator Overloading, static polymorphism)
+    resolve at compile time
+    function overloading -- same function name but different parameters
+    faster excution
+2. Run-time polymorphism (Virtual Functions, dynamic polymorphism)
+    resolve at run time
+    virtual functions -- base class me virtual keyword lagana hota hai
+    slower excution
+    function runtime -- same function, same parameters, but different class
+    uses a virtual keyword in the base class to allow derived classes to override it
+    acheiving this through the concept of inheritance
+*/
+
+// types of polymorphism -- 2.1
+// function overloading
+
+#include<iostream>
+using namespace std;
+
+// class A{
+//     public:
+//     void print(int x,int y){
+//         cout<<x+y<<"\n";
+//     }
+//     void print(float x,float y, float z){
+//         cout<<x+y<<"\n";
+//     }
+// };
+
+// int main(){
+//     A obj1;
+//     obj1.print(5,6);
+//     obj1.print(5.5,5.6,5.6);
+//     return 0;
+// }
+
+// typen of polymorphism -- 2.2
+// function overriding -- same function name, same parameters, but different class
+
+class animal{
+    public:
+    virtual void sound(){
+        cout<<"Animal makes a sound\n";
+    }
+};
+
+class dog:public animal{
+    public:
+    void sound() override{
+        cout<<"Dog barks\n";
+    }
+};
+
+class cat:public animal{
+    public:
+    void sound() override{
+        cout<<"Cat meows\n";
+    }
+};
+
+int main(){
+    dog d;
+    cat c;
+    d.sound();
+    c.sound();
+}
+
+// function overriding with virtual function
+#include<iostream>
+using namespace std;
+
+class parent{
+    public:
+    void sum(int a, int b){
+        cout<<a+b<<"parent";
+    }
+};
+
+class child : public parent{
+    public:
+    virtual void sum(int a, int b){
+        cout<<a+b<<"child";
+    }
+};
+
+int main(){
+    child obj1;
+    obj1.sum(5,7);
+    return 0;
+}
