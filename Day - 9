@@ -1,0 +1,82 @@
+#include<iostream>
+using namespace std;
+// PROBLEM --1
+// function overloading 
+
+class appliance{
+    public:
+    virtual void turnOn(){
+        cout<<"appliance is starting up"<<endl;
+    }
+    virtual void work() = 0;
+};
+
+class fan : public appliance{
+    public:
+    void turnOn() override{
+        cout<<"fan blades are moving slowly"<<endl;
+    }
+    void work() override{
+        cout<<"fan is giving cool air"<<endl;
+    }
+};
+
+class toaster : public appliance{
+    public:
+        void work() override{
+            cout<<"toaster is heating up the breads"<<endl;
+        }
+};
+
+int main(){
+    appliance* kitchenApp;
+    fan myfan;
+    kitchenApp = &myfan;
+    kitchenApp->turnOn();
+    kitchenApp->work();
+
+    toaster myToast;
+    kitchenApp = &myToast;
+    kitchenApp->turnOn();
+    kitchenApp->work();
+
+}
+
+#include<iostream>
+using namespace std;
+// PROBLEM --2
+// constructor overloading
+
+class rectangle{
+    public:
+    int length;
+    int width;
+
+    rectangle(){
+        length = 0;
+        width = 0;
+    }
+    rectangle(int side){
+        length = side;
+        width = side;
+    }
+    rectangle(int side1, int side2){
+        length = side1;
+        width = side2;
+    }
+
+    void showArea(){
+        cout<<length*width<<endl;
+    }
+};
+//  esme aegument object me hi pass kiye jate hain aur constructor ke naam same hote hai but unka parameter alag hota hai
+int main(){
+    rectangle r1; 
+    r1.showArea();
+
+    rectangle r2(5);
+    r2.showArea();
+
+    rectangle r3(5, 5);
+    r3.showArea();
+}
