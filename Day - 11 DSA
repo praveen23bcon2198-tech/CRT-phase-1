@@ -1,0 +1,24 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+bool isPalindrome(string str){
+    int start = 0;
+    int end = str.size()-1;
+
+    while(start < end){
+        if(str[start] != str[end]) return false; // If characters at start and end are not the same, it's not a palindrome
+        start++;
+        end--;
+    }
+    return true; // If we have checked all characters and they are the same, it's a palindrome
+}
+
+int main(){
+    string str;
+    cout<<"enter a string :";
+    cin>>str;
+
+    if(isPalindrome(str)) cout<<"palindrome string";
+    else cout<<"not a palindrome string";
+}
