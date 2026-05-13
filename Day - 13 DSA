@@ -1,0 +1,173 @@
+// binary stray
+#include<iostream>
+using namespace std;
+
+int binaryStray(int n){
+    if(n==1) return 2; // "0" and "1"
+    if(n==2) return 3; // "00", "01", "10" (not "11")
+    return binaryStray(n-1)+binaryStray(n-2);
+}
+
+int main(){
+    int n;
+    cout<<"Enter the value of n: ";
+    cin>>n;
+    cout<<"Number of binary strings of length "<<n<<" is: "<<binaryStray(n);
+    return 0;
+}
+
+
+// binary stray
+#include<iostream>
+using namespace std;
+
+int consecutiveOnes(int number){
+    // base cases
+    if(number == 1) return 2;
+    if(number == 2) return 3;
+    if(number == 0) return 1; // empty string
+    // logic
+    return consecutiveOnes(number-1) + consecutiveOnes(number-2);
+}
+
+int main(){
+    cout<<consecutiveOnes(10);
+    
+}
+
+
+// tillinf problem 4*N
+#include<iostream>
+using namespace std;
+
+int tillingproblem(int n){
+    if(n<4) return 1;
+    return tillingproblem(n-1) + tillingproblem(n-4);
+}
+
+int main(){
+    cout<<tillingproblem(10);
+    return 0;
+}
+
+
+//leetcode 198 house robber
+#include<iostream>
+using namespace std;
+#include<vector>
+
+
+int robber(vector<int>& nums){
+    // base cases
+    int n = nums.size();
+    if(n==0) return 0;
+    if(n==1) return nums[1];
+
+    // variables for store values
+    int prev1 = 0;
+    int prev2 = 0;
+
+    for(int i=0; i<n; i++){
+        int pick = nums[i] + prev2;
+        int notpick = prev1;
+        int curr = max(pick, notpick);
+        prev2 = prev1;
+        prev1 = curr;
+    }
+   return prev1;
+
+}
+
+int main(){
+    vector<int> nums = {1,2,3,1};
+    cout<<robber(nums);
+    return 0;
+}`
+
+//2nd method 
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int n = nums.size();
+        if(n==0) return 0;
+        if(n==1) return nums[0];
+
+        // logic
+        int prev2 = 0;
+        int prev1 = 0;
+
+        for(int money : nums){
+            int current = max(prev1,(money+prev2));
+            prev2 = prev1;
+            prev1 = current;
+        }
+        return prev1;
+    }
+};
+
+
+//leetcode 198 house robber
+#include<iostream>
+using namespace std;
+#include<vector>
+
+
+int robber(vector<int>& nums){
+    // base cases
+    int n = nums.size();
+    if(n==0) return 0;
+    if(n==1) return nums[1];
+
+    // variables for store values
+    int prev1 = 0;
+    int prev2 = 0;
+
+    for(int i=0; i<n; i++){
+        int pick = nums[i] + prev2;
+        int notpick = prev1;
+        int curr = max(pick, notpick);
+        prev2 = prev1;
+        prev1 = curr;
+    }
+   return prev1;
+
+}
+
+int main(){
+    vector<int> nums = {1,2,3,1};
+    cout<<robber(nums);
+    return 0;
+}`
+
+//2nd method
+class Solution {
+public:
+
+    // int robfrom(vector<int>& nums, int index){
+    //     // base
+    //     if(index >= nums.size()) return 0;
+
+    //     // logic
+    //     int include = nums[index] + (robfrom(nums, index+2));
+    //     int exclude = robfrom(nums, index+1);
+    //     return max(include, exclude);
+    //}
+    int rob(vector<int>& nums) {
+        int n = nums.size();
+        if(n==0) return 0;
+        if(n==1) return nums[0];
+
+        // logic
+        int prev2 = 0;
+        int prev1 = 0;
+
+        for(int money : nums){
+            int current = max(prev1,(money+prev2));
+            prev2 = prev1;
+            prev1 = current;
+        }
+        return prev1;
+        //return robfrom(nums, 0);
+
+    }
+};
