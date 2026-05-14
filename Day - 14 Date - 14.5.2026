@@ -31,3 +31,79 @@ int main(){
 
     return 0;
 }
+
+
+//reverse linked list
+#include<iostream>
+#include<vector>
+using namespace std;
+
+class ListNode{
+public:
+    int val;
+    ListNode* next;
+    ListNode(int x) : val(x), next(nullptr) {}
+};
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* prev = nullptr;
+        ListNode* curr = head;
+        ListNode* next = nullptr;
+
+        while(curr != nullptr){
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+};
+
+int main(){
+    ListNode* head = new ListNode(10);
+    head->next = new ListNode(20);
+    head->next->next = new ListNode(30);
+    head->next->next->next = new ListNode(40);
+
+    Solution s;
+    ListNode* reversedHead = s.reverseList(head);
+
+    // Print the reversed linked list
+    ListNode* temp = reversedHead;
+    while(temp != nullptr){
+        cout << temp->val << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+
+    return 0;
+}
+
+
+// middle of the linked list
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+
+        while(fast != nullptr && fast->next != nullptr){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;
+    }
+};
