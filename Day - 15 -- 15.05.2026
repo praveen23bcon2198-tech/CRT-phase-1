@@ -1,0 +1,89 @@
+//stach
+#include<iostream>
+#include<stack>
+using namespace std;
+
+int main(){
+    int arr[] = {10,20,30,40,50};
+    int n = sizeof(arr)/sizeof(arr[0]);
+
+    stack<int> st;
+
+    for(int i=0; i<n; i++){
+        st.push(arr[i]);
+    }
+
+    for(int i=0; i<n; i++){
+        arr[i] = st.top();
+        st.pop();
+    }
+
+    cout<<"Reversed array is:";
+    for(int i=0; i<n; i++){
+        cout<<" "<<arr[i];
+    }
+    cout<<endl;
+    return 0;
+}
+
+//valid parentheses
+#include<iostream>
+using namespace std;
+#include<stack>
+bool isValid(string s) {
+        
+    stack<char> st;
+    int n = s.size();
+    char c;
+
+    for(char c : s){
+        if(c == '(' || c == '{' || c == '['){
+                st.push(c);
+        }
+        else{
+            if(st.empty()) return false;
+
+            char top = st.top();
+
+            if(c == ')' && top == '(' || c == '}' && c == '{' || c == ']' && c == '['){
+                st.pop();
+            }
+            else{
+                return false;
+            }
+        }
+        return st.empty();
+    }
+}
+
+int main(){
+    string s = "({[]})";
+    if(isValid(s)){
+        cout<<"The parentheses are valid."<<endl;
+    }
+    else{
+        cout<<"The parentheses are not valid."<<endl;
+    }
+    return 0;
+}
+
+class Solution 
+{
+    public:
+    bool isValid(string s) {
+        stack<char> st;
+        
+        for(char c : s){
+            if(c=='(') st.push(')');
+            else if(c=='{') st.push('}');
+            else if(c=='[') st.push(']');
+            else{
+                if(st.empty() || st.top() != c){
+                    return false;
+                }
+                st.pop();
+            }
+        }
+        return st.empty();
+    }
+};
